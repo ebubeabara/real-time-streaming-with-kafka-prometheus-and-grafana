@@ -65,6 +65,27 @@ TBC
     * Build or edit report fields and visualisations if required
     * On `Home` tab, click `Refresh` button to load latest CPU usage metrics from PostgreSQL Database
 
+
+### Monitoring with Prometheus and Grafana
+1. Navigate to Kafka installation directory
+
+2. Download jmx_prometheus_javaagent-0.6 and kafka-0-8-2.yml files
+    * jmx_prometheus_javaagent-0.6: `wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.6/jmx_prometheus_javaagent-0.6.jar`
+    * kafka-0-8-2.yml: `wget https://raw.githubusercontent.com/prometheus/jmx_exporter/master/example_configs/kafka-0-8-2.yml`
+    
+3. Start Zookeeper `bin/zookeeper-server-start.sh config/zookeeper.properties`
+
+4. Start Kafka with the JMX exporter running as a Java agent
+    * *Set environment variable `export KAFKA_OPTS='-javaagent:/mnt/c/tools/kafka/kafka-2.7.0-src/jmx_prometheus_javaagent-0.6.jar=7071:/mnt/c/tools/kafka/kafka-2.7.0-src/kafka-0-8-2.yml'`
+    * Start Kafka `bin/kafka-server-start.sh config/server.properties`
+    
+5. Start Kafka Mongo Consumer
+
+6. Start Kafka Postgres Consumer
+
+7. Start Kafka Producer
+
+
 ### Infrastructure Time Series Properties
 
 * CPU Usage Percent
